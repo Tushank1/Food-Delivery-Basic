@@ -1,7 +1,11 @@
 import React from "react";
 import { MdOutlineStar } from "react-icons/md";
+import { addToCart } from "../redux/slices/CartSlice";
+import { useDispatch } from "react-redux";
 
 function FoodCart({ id, price, name, desc, rating, img }) {
+  const dispatch = useDispatch();
+
   return (
     <div className="font-bold w-[250px] bg-white p-5 flex flex-col rounded-lg shadow-md gap-1">
       <img
@@ -17,7 +21,12 @@ function FoodCart({ id, price, name, desc, rating, img }) {
         <span className="flex justify-center items-center ">
           <MdOutlineStar className="text-yellow-400 mr-1" /> {rating}
         </span>
-        <button className="p-1 text-white bg-green-500 rounded-lg hover:bg-green-600 text-sm font-semibold">
+        <button
+          onClick={() => {
+            dispatch(addToCart({ id, name, price, rating, qty: 1 }));
+          }}
+          className="p-1 text-white bg-green-500 rounded-lg hover:bg-green-600 text-sm font-semibold"
+        >
           Add to Cart
         </button>
       </div>
