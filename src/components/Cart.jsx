@@ -1,5 +1,6 @@
 import React from "react";
 import { FaRegWindowClose } from "react-icons/fa";
+import ItemCart from "./ItemCart";
 
 function Cart() {
   return (
@@ -9,6 +10,9 @@ function Cart() {
           <span className="text-xl font-bold text-grey-600">My Order</span>
           <FaRegWindowClose className="hover:border-red-600 hover:text-red-600 cursor-pointer" />
         </div>
+
+        <ItemCart />
+
         <div className="absolute bottom-0">
           <h3 className="font-semibold text-gray-800">Items : </h3>
           <h3 className="font-semibold text-gray-800">Total Amount : </h3>
