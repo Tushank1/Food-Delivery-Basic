@@ -13,7 +13,7 @@ function Cart() {
   return (
     <>
       <div
-        className={`fixed right-0 top-0 w-[60%] lg:w-[20vw] p-5 bg-white h-full ${
+        className={`fixed right-0 top-0 w-[60%] lg:w-[20vw] p-6 bg-white h-full ${
           activeCart ? "translate-x-0" : "translate-x-full"
         } transition-all duration-500 z-50 `}
       >
