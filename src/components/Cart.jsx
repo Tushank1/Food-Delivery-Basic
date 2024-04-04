@@ -8,12 +8,21 @@ function Cart() {
   const [activeCart, setActiveCart] = useState(false);
 
   const cartItems = useSelector((state) => state.cart.cart);
-  console.log(cartItems);
+
+  const totalQuantity = cartItems.reduce(
+    (totalQty, item) => totalQty + item.qty,
+    0
+  );
+
+  const totalPrice = cartItems.reduce(
+    (total, item) => total + item.qty * item.price,
+    0
+  );
 
   return (
     <>
       <div
-        className={`fixed right-0 top-0 w-[60%] lg:w-[20vw] p-6 bg-white h-full ${
+        className={`fixed right-0 top-0 w-[60%] lg:w-[20vw] p-5 bg-white h-full ${
           activeCart ? "translate-x-0" : "translate-x-full"
         } transition-all duration-500 z-50 `}
       >
@@ -25,11 +34,32 @@ function Cart() {
           />
         </div>
 
-        <ItemCart />
+        {cartItems.length > 0 ? (
+          cartItems.map((food) => {
+            return (
+              <ItemCart
+                key={food.id}
+                id={food.id}
+                name={food.name}
+                price={food.price}
+                img={food.img}
+                qty={food.qty}
+              />
+            );
+          })
+        ) : (
+          <h2 className="text-center font-bold text-xl text-gray-800">
+            Your Cart is Empty!!!
+          </h2>
+        )}
 
         <div className="absolute bottom-0">
-          <h3 className="font-semibold text-gray-800">Items : </h3>
-          <h3 className="font-semibold text-gray-800">Total Amount : </h3>
+          <h3 className="font-semibold text-gray-800">
+            Items : {totalQuantity}{" "}
+          </h3>
+          <h3 className="font-semibold text-gray-800">
+            Total Amount : {totalPrice}
+          </h3>
           <hr className="w-[90vw] lg:w-[18vw] my-2" />
           <button className="bg-green-500 font-bold px-3 text-white py-2 rounded-lg lg:w-[18vw] w-[90vw] mb-5 hover:bg-green-700">
             CheckOut
@@ -38,7 +68,10 @@ function Cart() {
       </div>
       <HiShoppingCart
         onClick={() => setActiveCart(!activeCart)}
-        className="rounded-full bg-white shadow-md text-5xl p-3 fixed bottom-4 right-4"
+        className={`rounded-full bg-white shadow-md text-5xl p-3 fixed bottom-4 right-4 ${
+          totalQuantity > 0 &&
+          "animate-bounce delay-500 duration-500 transition-all"
+        }`}
       />
     </>
   );
