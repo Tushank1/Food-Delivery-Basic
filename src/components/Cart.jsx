@@ -3,9 +3,11 @@ import { FaRegWindowClose } from "react-icons/fa";
 import ItemCart from "./ItemCart";
 import { useSelector } from "react-redux";
 import { HiShoppingCart } from "react-icons/hi2";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
   const [activeCart, setActiveCart] = useState(false);
+  const navigate = useNavigate();
 
   const cartItems = useSelector((state) => state.cart.cart);
 
@@ -61,7 +63,10 @@ function Cart() {
             Total Amount : {totalPrice}
           </h3>
           <hr className="w-[90vw] lg:w-[18vw] my-2" />
-          <button className="bg-green-500 font-bold px-3 text-white py-2 rounded-lg lg:w-[18vw] w-[90vw] mb-5 hover:bg-green-700">
+          <button
+            onClick={() => navigate("/success")}
+            className="bg-green-500 font-bold px-3 text-white py-2 rounded-lg lg:w-[18vw] w-[90vw] mb-5 hover:bg-green-700"
+          >
             CheckOut
           </button>
         </div>
