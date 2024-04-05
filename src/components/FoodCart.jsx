@@ -3,7 +3,7 @@ import { MdOutlineStar } from "react-icons/md";
 import { addToCart } from "../redux/slices/CartSlice";
 import { useDispatch } from "react-redux";
 
-function FoodCart({ id, price, name, desc, rating, img }) {
+function FoodCart({ id, price, name, desc, rating, img, handleToast }) {
   const dispatch = useDispatch();
 
   return (
@@ -23,7 +23,8 @@ function FoodCart({ id, price, name, desc, rating, img }) {
         </span>
         <button
           onClick={() => {
-            dispatch(addToCart({ id, name, price, rating, qty: 1 }));
+            dispatch(addToCart({ id, name, price, rating, img, qty: 1 }));
+            handleToast(name);
           }}
           className="p-1 text-white bg-green-500 rounded-lg hover:bg-green-600 text-sm font-semibold"
         >
